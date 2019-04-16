@@ -1,17 +1,19 @@
-import { LetterBoldPipe } from './shared/letter-bold.pipe';
-import { SearchFilterPipe } from './shared/filter-pipe';
-import { ClickOutsideDirective } from './shared/dropdown.directive';
-import { NgModule, ApplicationRef } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LetterBoldPipe } from "./shared/letter-bold.pipe";
+import { SearchFilterPipe } from "./shared/filter-pipe";
+import { ClickOutsideDirective } from "./shared/dropdown.directive";
+import { NgModule, ApplicationRef } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { HttpModule } from "@angular/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { AppComponent } from './app.component';
-import { ApiService } from './shared';
-import { routing } from './app.routing';
+import { AppComponent } from "./app.component";
+import { ApiService } from "./shared";
+import { routing } from "./app.routing";
 
-import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
+import { removeNgStyles, createNewHosts } from "@angularclass/hmr";
+import { SearchComponent } from "./search/search.component";
 
+import { NgSelectModule } from "@ng-select/ng-select";
 
 @NgModule({
   imports: [
@@ -19,23 +21,25 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    routing
+    routing,
+    NgSelectModule
   ],
   declarations: [
     AppComponent,
     ClickOutsideDirective,
     SearchFilterPipe,
-    LetterBoldPipe
+    LetterBoldPipe,
+    SearchComponent
   ],
-  providers: [
-    ApiService
-  ],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef) {};
+  constructor(public appRef: ApplicationRef) {}
   hmrOnDestroy(store) {
-    let cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
+    let cmpLocation = this.appRef.components.map(
+      cmp => cmp.location.nativeElement
+    );
     // recreate elements
     store.disposeOldHosts = createNewHosts(cmpLocation);
     // remove styles

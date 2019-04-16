@@ -1,0 +1,9 @@
+<label>Your first ng-select</label>
+<ng-select
+  [items]="cities"
+  bindLabel="name"
+  placeholder="Select city"
+  [(ngModel)]="selectedCity"
+>
+</ng-select>
+<p>Selected city: {{ selectedCity | json }}</p>
